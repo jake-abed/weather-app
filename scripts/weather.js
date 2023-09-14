@@ -1,6 +1,7 @@
 'use strict';
 
 const API_KEY = '1175470757064246b83173445231409';
+let loadingState = ''
 
 const getWeatherData = async (location) => {
     let url = 'https://api.weatherapi.com/v1/forecast.json?key=' +
