@@ -1,14 +1,29 @@
 'use strict';
 
 const API_KEY = '1175470757064246b83173445231409';
-let loadingState = ''
+let loadingState = {
+	stateInternal: '',
+	listener: function() {},
+	set state(newState) {
+		this.stateInternal = newState;
+		this.listener(newState);
+	},
+	get state() {
+		return this.stateInternal;
+	},
+	registerListener: function(listener) {
+		this.listener = listener;
+	}
+}
+
+let weatherData;
 
 const getWeatherData = async (location) => {
+	console.log(location);
 	let url = 'https://api.weatherapi.com/v1/forecast.json?key=' +
 		API_KEY + '&q=' + location + '&days=3&aqi=no&alerts=no';
 	const response = await fetch(url, { mode: 'cors' });
 	const digestedRes = await response.json();
-	console.log(digestedRes);
 	return digestedRes;
 }
 
@@ -44,3 +59,25 @@ const parseWeatherData = (weatherData) => {
 	}
 	}
 }
+
+//Dom Manipulation
+const locationInput = document.getElementById('location');
+const submitButton = document.querySelector('.submit-button');
+
+submitButton.addEventListener('click', async (e) => {
+	e.preventDefault();
+	if (locationInput.value == '') {
+		alert('Please provide a location.');
+		return;
+	}
+	if (loadingState.state === 'loading') {
+		return;
+	}
+	if (loadingState.state === '' ||
+		loadingState.state === 'loaded') {
+			loadingState.state = 'loading';
+			const data = await getWeatherData(locationInput.value);
+			weatherData = parseWeatherData(data);
+			return;
+		}
+})
