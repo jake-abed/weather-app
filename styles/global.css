@@ -3,8 +3,9 @@
     padding: 0;
 }
 
-root {
-
+:root {
+    font-size: 12px;
+    color: #022302;
 }
 
 body {
@@ -24,6 +25,25 @@ body {
     flex-wrap: wrap;
 }
 
+h3 {
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+h4, p {
+    display: inline;
+    line-height: 1.5rem;
+}
+
+.submit-button {
+    background-color: #F5FFF5;
+    font-weight: bolder;
+    color: #022302;
+    padding: 4px;
+    border-radius: 6px;
+    border: none;
+}
+
 section h1, section form {
     text-align: center;
     margin: 0px auto;
@@ -31,33 +51,65 @@ section h1, section form {
 }
 
 .weather {
-    display: none;
-    margin: 0 auto;
+    display: flex;
     position: relative;
 }
 
-.weather.active {
+.weather-info {
     display: flex;
-    background-color: #c3eac8;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.8s;
     height: 80dvh;
     width: max(50dvw, 280px);
     margin: 4px auto;
     border-radius: 8px;
-    background-color: #c3eac8;
     padding: 2%;
+}
+
+.weather-info.active {
+    background-color: #c3eac8;
+    opacity: 1;
+    gap: 8px;
+}
+
+.weather-info > div {
+    background-color: #F5FFF5;
+    width: 90%;
+    padding: 8px;
+    border-radius: 6px;
 }
 
 .load-display {
     display: none;
     position: absolute;
+    z-index: 2;
 }
 
 .load-display.loading {
-    display: block;
-    background-color: #00000066;
+    display: flex;
+    background-color: #021302;
     width: 100%;
     height: 100%;
     border-radius: 8px;
     left: 0;
     top: 0;
+    justify-content: center;
+}
+
+.load-display > svg {
+    align-self: center;
+}
+
+.load-display.loading > svg {
+    animation-name: spin;
+    animation-duration: 2000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
 }
