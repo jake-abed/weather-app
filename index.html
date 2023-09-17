@@ -3,14 +3,13 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="./styles/global.css">
 	<script defer src="./scripts/weather.js"></script>
 	<title>Document</title>
 </head>
 <body>
-	<header>
+	<section class="form-card">
 		<h1>It's Weather Time!</h1>
-	</header>
-	<section>
 		<form novalidate>
 			<div>
 				<label for="location"></label>
@@ -19,8 +18,32 @@
 			</div>
 		</form>
 	</section>
-	<section>
-		<div class="weather-info"></div>
+	<section class="weather">
+		<div class="weather-info">
+			<div class="today">
+				<h2>Today</h2>
+				<h3>Temperature:</h3>
+				<p class="temp-f"></p>
+				<h3>Chance of Rain:</h3>
+				<p class="rain-chance"></p>
+			</div>
+			<div class="tomorrow">
+				<h2>Tomorrow</h2>
+				<h3>Temperature:</h3>
+				<p class="temp-f"></p>
+				<h3>Chance of Rain:</h3>
+				<p class="rain-chance"></p>
+			</div>
+			<div class="overmorrow">
+				<h2>Overmorrow</h2>
+				<h3>Temperature:</h3>
+				<p class="temp-f"></p>
+				<h3>Chance of Rain:</h3>
+				<p class="rain-chance"></p>
+
+			</div>
+		</div>
+		<div class="load-display"></div>
 	</section>
 </body>
 </html>

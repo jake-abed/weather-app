@@ -1,0 +1,63 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+root {
+
+}
+
+body {
+    background-color: #021302;
+}
+
+.form-card {
+    width: max(50dvw, 280px);
+    margin: 4px auto;
+    border-radius: 8px;
+    background-color: #c3eac8;
+    padding: 2%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+section h1, section form {
+    text-align: center;
+    margin: 0px auto;
+    padding: 4px 0;
+}
+
+.weather {
+    display: none;
+    margin: 0 auto;
+    position: relative;
+}
+
+.weather.active {
+    display: flex;
+    background-color: #c3eac8;
+    height: 80dvh;
+    width: max(50dvw, 280px);
+    margin: 4px auto;
+    border-radius: 8px;
+    background-color: #c3eac8;
+    padding: 2%;
+}
+
+.load-display {
+    display: none;
+    position: absolute;
+}
+
+.load-display.loading {
+    display: block;
+    background-color: #00000066;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    left: 0;
+    top: 0;
+}

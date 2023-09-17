@@ -1,6 +1,9 @@
 'use strict';
 
 const API_KEY = '1175470757064246b83173445231409';
+
+//State object to control UI elements.
+//Has the option to register a listener that updates CSS 
 let loadingState = {
 	stateInternal: '',
 	listener: function() {},
@@ -63,21 +66,46 @@ const parseWeatherData = (weatherData) => {
 //Dom Manipulation
 const locationInput = document.getElementById('location');
 const submitButton = document.querySelector('.submit-button');
+const loadDisplay = document.querySelector('.load-display')
+const weather = document.querySelector('.weather');
+
+let forecast = {
+	tomorrow : {
+		node: document.querySelector('div.tomorrow'),
+		h2: document.querySelector('div.tomorrow>h2'),
+		temperatureF: document.querySelector('div.tomorrow>.temp-f'),
+	},
+}
+
+loadingState.registerListener((value) => {
+	switch (value) {
+		case 'loading':
+			loadDisplay.classList.add('loading');
+			break;
+		case 'loaded':
+			loadDisplay.classList.remove('loading');
+			break;
+		default:
+			loadDisplay.classList.remove('loading');
+			break;
+	}
+})
 
 submitButton.addEventListener('click', async (e) => {
 	e.preventDefault();
+	const state = loadingState.state;
 	if (locationInput.value == '') {
 		alert('Please provide a location.');
 		return;
 	}
-	if (loadingState.state === 'loading') {
+	if (state === 'loading') {
 		return;
 	}
-	if (loadingState.state === '' ||
-		loadingState.state === 'loaded') {
-			loadingState.state = 'loading';
-			const data = await getWeatherData(locationInput.value);
-			weatherData = parseWeatherData(data);
-			return;
-		}
-})
+	if (state === '' || state === 'loaded') {
+		loadingState.state = 'loading';
+		weather.classList.toggle('active', true);
+		const data = await getWeatherData(locationInput.value);
+		weatherData = parseWeatherData(data);
+		return loadingState.state = 'loaded';
+	}
+});
